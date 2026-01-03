@@ -40,8 +40,7 @@ jobs:
           workspaces: './src-tauri -> target'
 
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
-
+        run: pnpm install
 
       - name: Build Tauri app
         run: pnpm tauri build
@@ -95,7 +94,7 @@ jobs:
             "platforms": {
               "windows-x86_64": {
                 "signature": "$(cat fixmate-ai-update-signature/*.sig || echo '')",
-                "url": "https://github.com/${{ github.repository }}/releases/download/${GITHUB_REF#refs/tags/}/$(ls fixmate-ai-windows-installer/*.exe | xargs -n 1 basename )"
+                "url": "https://github.com/${{ github.repository }}/releases/download/${GITHUB_REF#refs/tags/}/$(ls fixmate-ai-windows-installer/*.exe | xargs -n 1 basename)"
               }
             }
           }

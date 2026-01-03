@@ -1,28 +1,66 @@
-import { Route, Switch } from "wouter";
-import { ThemeProvider } from "@/contexts/ThemeContext";
-import { AuthProvider } from "@/contexts/AuthContext";
 import { Toaster } from "@/components/ui/sonner";
-import Home from "@/pages/Home";
-import TauriAutoUpdater from "@/components/TauriAutoUpdater";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import NotFound from "@/pages/NotFound";
+import { Route, Switch } from "wouter";
+import ErrorBoundary from "./components/ErrorBoundary";
+import { ThemeProvider } from "./contexts/ThemeContext";
+import { OptimizationProvider } from "./contexts/OptimizationContext";
+import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
+import OptimizerDashboard from "./pages/OptimizerDashboard";
+import Admin from "./pages/Admin";
+import TestButton from "./pages/TestButton";
+import LicenseSettings from "./pages/LicenseSettings";
+import { TauriAutoUpdater } from "./components/TauriAutoUpdater";
 
-export default function App( ) {
+
+import Pricing from "./pages/Pricing";
+import Metrics from "./pages/Metrics";
+
+
+function Router() {
+  // make sure to consider if you need authentication for certain routes
   return (
-    <ThemeProvider defaultTheme="light" storageKey="fixmate-theme">
-      <AuthProvider>
-        <TauriAutoUpdater />
-        <Switch>
-          <Route path="/" component={Home} />
-          <Route>
-            <div className="min-h-screen flex items-center justify-center">
-              <div className="text-center">
-                <h1 className="text-4xl font-bold mb-4">404</h1>
-                <p className="text-muted-foreground">Page not found</p>
-              </div>
-            </div>
-          </Route>
-        </Switch>
-        <Toaster />
-      </AuthProvider>
-    </ThemeProvider>
+    <>
+      <Switch>
+        <Route path={"/"} component={OptimizerDashboard} />
+        <Route path={"/test"} component={TestButton} />
+        <Route path={"/old"} component={Dashboard} />
+        <Route path={"/pricing"} component={Pricing} />
+        <Route path={"/metrics"} component={Metrics} />
+        <Route path={"/admin"} component={Admin} />
+        <Route path={"/home"} component={Home} />
+        <Route path={"/license"} component={LicenseSettings} />
+        <Route path={"/404"} component={NotFound} />
+        {/* Final fallback route */}
+        <Route component={NotFound} />
+      </Switch>
+    </>
   );
 }
+
+// NOTE: About Theme
+// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
+//   to keep consistent foreground/background color across components
+// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
+
+function App() {
+  return (
+    <ErrorBoundary>
+      <ThemeProvider
+        defaultTheme="dark"
+        // switchable
+      >
+        <OptimizationProvider>
+          <TooltipProvider>
+            <Toaster />
+            <TauriAutoUpdater />
+            <Router />
+          </TooltipProvider>
+        </OptimizationProvider>
+      </ThemeProvider>
+    </ErrorBoundary>
+  );
+}
+
+export default App;

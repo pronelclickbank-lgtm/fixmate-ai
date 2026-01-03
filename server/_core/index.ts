@@ -7,6 +7,8 @@ import { registerOAuthRoutes } from "./oauth";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
+import { startRegistrationReminderScheduler } from "../schedulers/registrationReminders";
+import { initializeScheduler } from "../schedulers/optimizationScheduler";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -59,6 +61,10 @@ async function startServer() {
 
   server.listen(port, () => {
     console.log(`Server running on http://localhost:${port}/`);
+    
+    // Start background schedulers
+    startRegistrationReminderScheduler();
+    initializeScheduler();
   });
 }
 

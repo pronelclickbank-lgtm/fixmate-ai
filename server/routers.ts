@@ -2,6 +2,21 @@ import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
+import { diagnosticsRouter } from "./routers/diagnostics";
+import { subscriptionsRouter } from "./routers/subscriptions";
+import { chatRouter } from "./routers/chat";
+import { adminRouter } from "./routers/admin";
+import { fixesRouter } from "./routers/fixes";
+import { metricsRouter } from "./routers/metrics";
+import { userRouter } from "./routers/user";
+import { optimizerRouter } from "./routers/optimizer";
+import { updatesRouter } from "./routers/updates";
+import { automaticRouter } from "./routers/automatic";
+import { startupRouter } from "./routers/startup";
+import { processesRouter } from "./routers/processes";
+import { backupsRouter } from "./routers/backups";
+import { adminDashboardRouter } from "./routers/adminDashboardIntegration";
+import { licenseRouter } from "./routers/license";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -17,12 +32,22 @@ export const appRouter = router({
     }),
   }),
 
-  // TODO: add feature routers here, e.g.
-  // todo: router({
-  //   list: protectedProcedure.query(({ ctx }) =>
-  //     db.getUserTodos(ctx.user.id)
-  //   ),
-  // }),
+  // FixMate AI routers
+  diagnostics: diagnosticsRouter,
+  subscriptions: subscriptionsRouter,
+  chat: chatRouter,
+  admin: adminRouter,
+  fixes: fixesRouter,
+  metrics: metricsRouter,
+  user: userRouter,
+  optimizer: optimizerRouter,
+  updates: updatesRouter,
+  automatic: automaticRouter,
+  startup: startupRouter,
+  processes: processesRouter,
+  backups: backupsRouter,
+  adminDashboard: adminDashboardRouter,
+  license: licenseRouter,
 });
 
 export type AppRouter = typeof appRouter;
