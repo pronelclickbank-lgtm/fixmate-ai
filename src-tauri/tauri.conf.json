@@ -22,26 +22,16 @@
       "digestAlgorithm": "sha256",
       "timestampUrl": "",
       "wix": {
-        "language": ["en-US"],
-        "template": null
+        "language": ["en-US"]
       },
       "nsis": {
-        "license": null,
-        "installerIcon": "icons/icon.ico",
         "installMode": "perUser",
         "languages": ["English"],
-        "displayLanguageSelector": false,
         "compression": "lzma"
       }
-    }
-  },
-  "updater": {
-    "active": true,
-    "endpoints": [
-      "https://github.com/pronelclickbank-lgtm/fixmate-ai/releases/latest/download/latest.json"
-    ],
-    "dialog": true,
-    "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDA0NEUxOEEyQ0MyODkxMDEKUldRQmtTak1vaGhPQkVMVlRTZkNyMEZhdXFMTFV2QUU1blpuUVVxM3JVaVdNeEdvM1N4eExmckcK"
+    },
+    "publisher": "FixMate AI",
+    "homepage": "https://github.com/pronelclickbank-lgtm/fixmate-ai"
   },
   "app": {
     "windows": [
@@ -59,6 +49,16 @@
     ],
     "security": {
       "csp": null
+    }
+  },
+  "plugins": {
+    "updater": {
+      "active": true,
+      "endpoints": [
+        "https://github.com/pronelclickbank-lgtm/fixmate-ai/releases/latest/download/latest.json"
+      ],
+      "dialog": true,
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDA0NEUxOEEyQ0MyODkxMDEKUldRQmtTak1vaGhPQkVMVlRTZkNyMEZhdXFMTFV2QUU1blpuUVVxM3JVaVdNeEdvM1N4eExmckcK"
     }
   }
 }
